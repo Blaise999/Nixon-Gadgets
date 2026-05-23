@@ -24,12 +24,15 @@ export default function ProductDetailPage() {
   const [hydrated, setHydrated] = useState(false);
   useEffect(() => setHydrated(true), []);
 
-  const product = allProducts.find((p) => p.slug === slug);
+  const maybeProduct = allProducts.find((p) => p.slug === slug);
+  
   // Wait for client hydration before declaring not-found (Zustand+persist may rehydrate)
-  if (!product) {
+  if (!maybeProduct) {
     if (!hydrated) return null;
     return notFound();
   }
+
+  const product = maybeProduct; // TypeScript now knows product is defined
 
   const addItem = useCart(s => s.addItem);
   const [variant, setVariant] = useState(product.storage || "");
