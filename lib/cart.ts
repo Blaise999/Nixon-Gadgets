@@ -3,6 +3,7 @@ import { create } from "zustand";
 import { persist } from "zustand/middleware";
 import { CartItem } from "./types";
 
+
 type CartState = {
   items: CartItem[];
   bump: number;
